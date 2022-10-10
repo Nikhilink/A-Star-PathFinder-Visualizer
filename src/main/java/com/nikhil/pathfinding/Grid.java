@@ -7,12 +7,16 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
+
+import com.nikhil.view.Window;
 
 /**
  * Creates a Grid with nodes on Window
  */
 public class Grid 
 {
+    private static final Logger LOG = Logger.getLogger(Window.class.getName());
     Node[][] grid;
 
     List<Node> path;
@@ -206,10 +210,14 @@ public class Grid
             currentNode = currentNode.getParent();
         }
         Collections.reverse(path);
+        StringBuilder wholePath = new StringBuilder();
         for(Node node : path)
         {
-            System.out.print(node.getNodeNumber()+" ");
+            // System.out.print(node.getNodeNumber()+" ");
+            wholePath.append(node.getNodeNumber()+" ");
+            
         }
+        LOG.info(wholePath.toString());
         return path;
     }
     /**

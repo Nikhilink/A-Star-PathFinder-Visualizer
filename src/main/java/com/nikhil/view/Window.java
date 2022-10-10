@@ -3,6 +3,7 @@ package com.nikhil.view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,6 +19,7 @@ public class Window extends JPanel
     private JFrame jFrame;
     private Grid grid;
     private Node start = null,end = null;
+    private static final Logger LOG = Logger.getLogger(Window.class.getName());
 
     /**
      * Creates a Window with specified Parameters
@@ -57,18 +59,21 @@ public class Window extends JPanel
                 if(start == null)
                 {
                     start = grid.getClickedNode(e.getX(), e.getY());
-                    System.out.println(start.getNodeNumber());
+                    // System.out.println(start.getNodeNumber());
+                    LOG.info(start.getNodeNumber()+"");
                     jFrame.setTitle("Choose End Node");
                 }
                 else if(start != null && end == null)
                 {
                     end = grid.getClickedNode(e.getX(), e.getY());
-                    System.out.println(end.getNodeNumber());
+                    // System.out.println(end.getNodeNumber());
+                    LOG.info(end.getNodeNumber()+"");
                     jFrame.setTitle("A* Pathfinding");
                     long startTime = System.currentTimeMillis();
                     grid.findPath(start, end);
                     jFrame.setTitle("Total Time: "+(System.currentTimeMillis() - startTime)+" Milli Seconds");
-                    System.out.println("\nTotal Time: "+(System.currentTimeMillis() - startTime)+" Milli Seconds");
+                    // System.out.println("\nTotal Time: "+(System.currentTimeMillis() - startTime)+" Milli Seconds");
+                    LOG.info("\nTotal Time: "+(System.currentTimeMillis() - startTime)+" Milli Seconds");
                 }
             }
 
